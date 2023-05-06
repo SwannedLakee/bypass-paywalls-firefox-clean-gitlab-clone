@@ -1,0 +1,33 @@
+name: cloner
+
+on:
+
+  schedule:
+    - cron: '0 0 1 * *'
+ 
+  workflow_dispatch: # on button click
+  
+  push:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        
+      - name: clone
+        run: git clone https://gitlab.com/magnolia1234/bypass-paywalls-firefox-clean.git
+
+      - name: 7z install
+        run: sudo apt-get install p7zip-full
+        
+      - name: zip repo
+        run: 7z a mdict-analysis mdict-analysis
+        
+      - name: Save
+        if: always() # Forces this to run even if wget fails
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Saving...
+          file_pattern: '*'
