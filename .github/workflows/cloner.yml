@@ -23,7 +23,7 @@ jobs:
         run: sudo apt-get install p7zip-full
         
       - name: zip repo
-        run: 7z a mdict-analysis mdict-analysis
+        run: 7z a bypass-paywalls-firefox-clean bypass-paywalls-firefox-clean
         
       - name: Save
         if: always() # Forces this to run even if wget fails
